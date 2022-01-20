@@ -15,42 +15,52 @@ def open_cell_zero(cell_position_x, cell_position_y, board, number_of_opened_cel
         if (cell_position_y - 1 >= 0) & (temp_board[cell_position_x][cell_position_y - 1] != -2):  # not opened yet
             temp_board, number_of_opened_cells = open_cell_zero(cell_position_x, cell_position_y - 1, temp_board,
                                                                 number_of_opened_cells)
+
         # Right
         if cell_position_y + 1 < len(temp_board[0]):
             if temp_board[cell_position_x][cell_position_y + 1] != -2:  # not opened yet
                 temp_board, number_of_opened_cells = open_cell_zero(cell_position_x, cell_position_y + 1,
                                                                     temp_board, number_of_opened_cells)
+
+
         # Down
         if cell_position_x + 1 < len(temp_board):
             if temp_board[cell_position_x + 1][cell_position_y] != -2:  # not opened yet
                 temp_board, number_of_opened_cells = open_cell_zero(cell_position_x + 1, cell_position_y,
                                                                     temp_board, number_of_opened_cells)
+
         # Up
         if (cell_position_x - 1 >= 0) & (temp_board[cell_position_x - 1][cell_position_y] != -2):  # not opened yet
             temp_board, number_of_opened_cells = open_cell_zero(cell_position_x - 1, cell_position_y, temp_board,
                                                                 number_of_opened_cells)
+
         # Up Left
         if (cell_position_y - 1 >= 0) & (cell_position_x - 1 >= 0) & (
                 temp_board[cell_position_x - 1][cell_position_y - 1] != -2):  # not opened yet
             temp_board, number_of_opened_cells = open_cell_zero(cell_position_x - 1, cell_position_y - 1,
                                                                 temp_board, number_of_opened_cells)
 
+
         # Up Right
         if (cell_position_y + 1 < len(temp_board[0])) & (cell_position_x - 1 >= 0):
             if temp_board[cell_position_x - 1][cell_position_y + 1] != -2:  # not opened yet
                 temp_board, number_of_opened_cells = open_cell_zero(cell_position_x - 1, cell_position_y + 1,
                                                                     temp_board, number_of_opened_cells)
+
         # Down Left
         if (cell_position_y - 1 >= 0) & (cell_position_x + 1 < len(temp_board)):
             if temp_board[cell_position_x + 1][cell_position_y - 1] != -2:  # not opened yet
                 temp_board, number_of_opened_cells = open_cell_zero(cell_position_x + 1, cell_position_y - 1,
                                                                     temp_board, number_of_opened_cells)
 
+
         # Down Right
         if (cell_position_y + 1 < len(temp_board[0])) & (cell_position_x + 1 < len(temp_board)):
             if temp_board[cell_position_x + 1][cell_position_y + 1] != -2:  # not opened yet
                 temp_board, number_of_opened_cells = open_cell_zero(cell_position_x + 1, cell_position_y + 1,
-                                                                    temp_board, number_of_opened_cells)
+                                                                   temp_board, number_of_opened_cells)
+
+    #print("board" , temp_board)
     return temp_board, number_of_opened_cells
 
 
@@ -190,8 +200,19 @@ def uncover_neighbors_modified(viewBoard, msBoard, unOpenedFeasibleList, x, y):
                 uncover_neighbors_modified(viewBoard, msBoard, unOpenedFeasibleList, x, y - 1)
             if y < len(viewBoard[0]) - 1:
                 uncover_neighbors_modified(viewBoard, msBoard, unOpenedFeasibleList, x, y + 1)
+            #####
+            if len(viewBoard) - 1 > x+1 and len(viewBoard[0]) - 1 > y+1:
+                uncover_neighbors_modified(viewBoard, msBoard, unOpenedFeasibleList, x+1, y+1)
+            if x-1 > 0 and len(viewBoard[0]) - 1 > y+1:
+                uncover_neighbors_modified(viewBoard, msBoard, unOpenedFeasibleList, x-1, y+1)
+            if len(viewBoard) - 1 > x+1 and y-1 > 0:
+                uncover_neighbors_modified(viewBoard, msBoard, unOpenedFeasibleList, x+1, y - 1)
+            if x-1 > 0 and y-1 > 0:
+                uncover_neighbors_modified(viewBoard, msBoard, unOpenedFeasibleList, x-1, y-1)
+
     elif msBoard[x][y] != 0:
         viewBoard[x][y] = msBoard[x][y]
+
 
     unOpenedFeasibleList.remove([x, y])
 

@@ -43,6 +43,7 @@ def uncover_neighbors(pBoard, mBoard, unOpenedFeasibleList, row, col, uncovered_
             uncover_neighbors(pBoard, mBoard, unOpenedFeasibleList, row, col + 1, uncovered_neighbors)
 
 
+
 # FUNCTION generate_population
 # ARGUMENTS: mBoard, populationSize
 # pop_fitness: (a, b) a is the fitness, b is one solution
@@ -70,7 +71,7 @@ def generate_population(mBoard, populationSize, all_uncovered_neighbors):
             rowsCount += 1
         # until here we initialized the pBoard to 0
 
-        print("******* New Population *******")
+
 
         uncovered_neighbors = set()
         # chromosome created if no more non-mine cell available to be clicked
@@ -79,19 +80,13 @@ def generate_population(mBoard, populationSize, all_uncovered_neighbors):
             gen = random.choice(unOpenedFeasibleList)
             chromosome.append(gen)
 
-            utils.print_current_board_for_view(pBoard, mBoard)
-
-            print("\nclick on: " + str(gen))  # indicates the cell that was clicked
-            print("*****************************")
-
             if mBoard[gen[0]][gen[1]] != 0:
                 pBoard[gen[0]][gen[1]] = 1
                 unOpenedFeasibleList.remove(gen)
             else:
                 uncover_neighbors(pBoard, mBoard, unOpenedFeasibleList, gen[0], gen[1], uncovered_neighbors)
 
-        if len(unOpenedFeasibleList) == 0:
-            utils.print_current_board_for_view(pBoard, mBoard)
+
 
         print()
         if chromosome not in population:

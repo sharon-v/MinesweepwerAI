@@ -15,7 +15,6 @@ def remove_redundant_clicks(solutions, all_uncovered_neighbors):
         size = len(solution)
         for i in range(size):
             click_key = str(original_solutions[k][i][0]) + '+' + str(original_solutions[k][i][1])
-            print("click_key" ,click_key)
             if click_key not in all_uncovered_neighbors:
                 continue
 

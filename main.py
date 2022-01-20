@@ -79,7 +79,7 @@ if __name__ == '__main__':
         else:
             best_steps = min(map(len, population))
 
-        # local_search_population = generate_ls_population(population, ms_board, num_mines)
+        #local_search_population = generate_ls_population(population, ms_board, num_mines)
         # print('local_search_population={}'.format(local_search_population))
         # print('local_search_population shape = {}'.format(shape_of_population(local_search_population)))
         # optimal_ls.extend(shape_of_population(local_search_population))
@@ -88,7 +88,12 @@ if __name__ == '__main__':
         global_optimal = min(best_steps, global_optimal)
         # print('{}'.format(population))
         print('best result is {}'.format(best_steps))
+    print("!!!!!!!!!!!!!!!!!!!")
+    local_search_population = generate_ls_population(population, ms_board, num_mines)
+    print('local_search_population={}'.format(local_search_population))
+    print('local_search_population shape = {}'.format(shape_of_population(local_search_population)))
+    optimal_ls.extend(shape_of_population(local_search_population))
 
     print('global optimal is {}'.format(global_optimal))
     print('optimal GA = {}'.format(min(optimal_ga)))
-    # print('optimal LS = {}'.format(min(optimal_ls)))
+    print('optimal LS = {}'.format(min(optimal_ls)))
