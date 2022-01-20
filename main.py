@@ -1,9 +1,8 @@
 from config import *
-from population_generation import *
+from generate_population import *
 from scipy.special import comb
-from local_search import *
-
-import ga
+from localSearchAlgorithm import *
+import geneticAlgorithm
 
 if __name__ == '__main__':
     ms_board = BEGINNER_BOARD
