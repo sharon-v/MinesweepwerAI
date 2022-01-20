@@ -24,6 +24,7 @@ if __name__ == '__main__':
     optimal_ls = []
 
     for generation in range(num_generations):
+        # if the best solution was found.
         if len(population) == 1:
             break
         print("Generation {} ".format(generation))
@@ -32,21 +33,25 @@ if __name__ == '__main__':
         best_steps = ga.cal_fitness(population)
 
         parents = ga.generate_parents(ms_board, population, num_parents)
-
+        print("parents {} ".format(parents))
         parents_size = len(parents)
         offsprings_size = int(comb(parents_size, 2))
         offsprings = ga.crossover(parents, offsprings_size)
-
+        print("Babies {} ".format(offsprings))
         ga.mutation(offsprings, len(ms_board), len(ms_board[0]))
+        print("Babies Mutation  {} ".format(offsprings))
+
 
         # Create new population
         population = parents + offsprings
+        print("New Population {} ".format(population))
+
 
         ga.remove_redundant_clicks(population, all_uncovered_neighbors)
 
         print('population = {}'.format(population))
         print('population shape = {}'.format(shape_of_population(population)))
-        optimal_ga.extend(shape_of_population(population))
+        #optimal_ga.extend(shape_of_population(population))
 
         # best_steps=min(min(map(len, population)), best_steps)
 

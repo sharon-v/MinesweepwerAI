@@ -39,7 +39,7 @@ def cal_fitness(population):
     '''
     min_steps, max_steps = min(map(len, population)), max(map(len, population))
 
-    # print('min_steps are {}'.format(min_steps))
+    print('min_steps are {}'.format(min_steps))
     steps_threshold = (min_steps + max_steps) // 2
 
     original_pop = copy.deepcopy(population)
@@ -66,10 +66,15 @@ def fitness_func(ms_board, solutions, pop_fitness):
 
 
 def generate_parents(ms_board, population, num_parents):
+    """
+    :param ms_board:
+    :param population: arr with all the solution.
+    :param num_parents: how many parents to choose.
+    :return: Returned arr in size 4 with 4 random parents.
+    """
     '''
     Randomly select num_parents parents
     '''
-
     par_list = []
     par_index_set = set()
 
@@ -87,6 +92,12 @@ def generate_parents(ms_board, population, num_parents):
 
 
 def crossover(parents, offsprings_size):
+    """
+
+    :param parents: The parents
+    :param offsprings_size: How many baby to do.
+    :return: All the baby.
+    """
     '''
     We use single point crossover
     Returns list of offsprings
