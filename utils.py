@@ -176,10 +176,11 @@ def uncover_neighbors_modified(viewBoard, msBoard, unOpenedFeasibleList, x, y):
 
     cellNumber = msBoard[x][y]
     # viewBoard[row][col] = 1
-    if msBoard[x][y] == '-1':
+    if msBoard[x][y] == -1:
         viewBoard[x][y] = '!'
-    elif msBoard[x][y] == '0':
+    elif msBoard[x][y] == 0:
         # need to open all cells until the border is not 0's
+        viewBoard[x][y] = 0
         if cellNumber == 0:
             if x > 0:
                 uncover_neighbors_modified(viewBoard, msBoard, unOpenedFeasibleList, x - 1, y)

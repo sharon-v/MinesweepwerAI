@@ -7,7 +7,6 @@ from config import *
 
 def remove_redundant_clicks(solutions, all_uncovered_neighbors):
     original_solutions = copy.deepcopy(solutions)
-
     pop_size = len(solutions)
 
     for k in range(pop_size):
@@ -16,7 +15,7 @@ def remove_redundant_clicks(solutions, all_uncovered_neighbors):
         size = len(solution)
         for i in range(size):
             click_key = str(original_solutions[k][i][0]) + '+' + str(original_solutions[k][i][1])
-
+            print("click_key" ,click_key)
             if click_key not in all_uncovered_neighbors:
                 continue
 
@@ -27,6 +26,7 @@ def remove_redundant_clicks(solutions, all_uncovered_neighbors):
                 if neigh_value in all_uncovered_neighbors[click_key]:
                     if original_solutions[k][j] in solutions:
                         solutions.remove(original_solutions[k][j])
+
 
 
 # Based on the clicks
