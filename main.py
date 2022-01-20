@@ -36,7 +36,7 @@ if __name__ == '__main__':
         for i in range(len(population)):
             print("Game number {} to Generation number {}".format(i + 1, generation))
             print("steps", population[i])  # instead, print the board
-            print_board_view(ms_board, population)  # maybe add pboard???????????????????????????
+            print_board_view(ms_board, population[0])  # maybe add pboard???????????????????????????
 
         num_parents = min(num_parents, len(population) // 2)
         best_steps = ga.cal_fitness(population)

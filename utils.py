@@ -138,9 +138,11 @@ def print_board_view(msBoard, moves):   # maybe add pboard???????????????????
 
     # uncover cells and re-print board
     for m in moves:
+        print( "**************** ", m)
         x = m[0]
         y = m[1]
-        cur_move = msBoard[x][y]
+
+        # cur_move = msBoard[x][y]
 
         # if cur_move == -1:
         #     board_to_print[x][y] = '!'
@@ -174,9 +176,9 @@ def uncover_neighbors_modified(viewBoard, msBoard, unOpenedFeasibleList, x, y):
 
     cellNumber = msBoard[x][y]
     # viewBoard[row][col] = 1
-    if msBoard[x][y] == -1:
+    if msBoard[x][y] == '-1':
         viewBoard[x][y] = '!'
-    elif msBoard[x][y] == 0:
+    elif msBoard[x][y] == '0':
         # need to open all cells until the border is not 0's
         if cellNumber == 0:
             if x > 0:
