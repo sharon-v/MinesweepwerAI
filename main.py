@@ -2,12 +2,11 @@ from config import *
 from generate_population import *
 from scipy.special import comb
 from localSearchAlgorithm import *
-import geneticAlgorithm
+import geneticAlgorithm as ga
 
 if __name__ == '__main__':
     ms_board = BEGINNER_BOARD
     num_mines = BEGINNER_MINES_NUMBER
- # ckckk
     # key: string row+col: set(neighbors)
     # e.g. [3,4] key: 3+4
     all_uncovered_neighbors = {}
@@ -38,7 +37,7 @@ if __name__ == '__main__':
         offsprings_size = int(comb(parents_size, 2))
         offsprings = ga.crossover(parents, offsprings_size)
 
-        ga.mutation(offsprings,len(ms_board), len(ms_board[0]))
+        ga.mutation(offsprings, len(ms_board), len(ms_board[0]))
 
         # Create new population
         population = parents + offsprings
