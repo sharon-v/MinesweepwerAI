@@ -1,30 +1,27 @@
-#!/usr/bin/env python
-# coding: utf-8
 import random
-import config
-import copy
-
+import utils
 
 # Author: Barry, modified by happygirlzt
 
-# FUNCTION uncover_neighbors
-# ARGUMENTS: pBoard, mBoard, unOpenedFeasibleList, row, col
-#
-# pBoard => playing board
-# record opened and unopened cells in board (0 for unopened, 1 for opened)
-#
-# mBoard => map board (i.e BEGINNER_BOARD)
-# contains value of each cell, -1 means 'mine'
-#
-# unOpenedFeasibleList => a list containing non mines clicks available for next clicks
-#
-# row => the clicked row, col => the clicked column
+"""
+FUNCTION uncover_neighbors
+ARGUMENTS: pBoard, mBoard, unOpenedFeasibleList, row, col
 
-# res is for accumulating how many cells could be uncovered => fitness
+pBoard => playing board
+record opened and unopened cells in board (0 for unopened, 1 for opened)
+
+mBoard => map board (i.e BEGINNER_BOARD)
+contains value of each cell, -1 means 'mine'
+
+unOpenedFeasibleList => a list containing non mines clicks available for next clicks
+
+row => the clicked row, col => the clicked column
+
+res is for accumulating how many cells could be uncovered => fitness
+"""
+
+
 def uncover_neighbors(pBoard, mBoard, unOpenedFeasibleList, row, col, uncovered_neighbors):
-    # print()
-    # for r in pBoard:
-    #     print(r)
 
     if pBoard[row][col] == 1:
         return
@@ -51,16 +48,7 @@ def uncover_neighbors(pBoard, mBoard, unOpenedFeasibleList, row, col, uncovered_
 # pop_fitness: (a, b) a is the fitness, b is one solution
 def generate_population(mBoard, populationSize, all_uncovered_neighbors):
     # Generate unOpenedFeasibleList
-    unOpenedFeasibleList = []
-    row = 0
-    while row < len(mBoard):
-        col = 0
-        while col < len(mBoard[0]):
-            if mBoard[row][col] != -1:
-                gen = [row, col]
-                unOpenedFeasibleList.append(gen)
-            col = col + 1
-        row = row + 1
+    unOpenedFeasibleList = utils.generate_unopened_list(mBoard)
 
     # Copy the default unOpenedFeasibleList
     defaultUnOpened = unOpenedFeasibleList.copy()
@@ -89,10 +77,9 @@ def generate_population(mBoard, populationSize, all_uncovered_neighbors):
         while len(unOpenedFeasibleList) > 0:
             # generate genes
             gen = random.choice(unOpenedFeasibleList)
-
             chromosome.append(gen)
 
-            print_current_board_for_view(pBoard, mBoard)
+            utils.print_current_board_for_view(pBoard, mBoard)
 
             print("\nclick on: " + str(gen))  # indicates the cell that was clicked
             print("*****************************")
@@ -104,7 +91,7 @@ def generate_population(mBoard, populationSize, all_uncovered_neighbors):
                 uncover_neighbors(pBoard, mBoard, unOpenedFeasibleList, gen[0], gen[1], uncovered_neighbors)
 
         if len(unOpenedFeasibleList) == 0:
-            print_current_board_for_view(pBoard, mBoard)
+            utils.print_current_board_for_view(pBoard, mBoard)
 
         print()
         if chromosome not in population:
@@ -125,22 +112,3 @@ def generate_population(mBoard, populationSize, all_uncovered_neighbors):
             count = count + 1
 
     return population
-
-
-def print_current_board_for_view(pBoard, mBoard):
-    # create empty board
-    board_to_print = []
-    for i in range(len(pBoard), 0, -1):
-        board_to_print.append([0] * len(pBoard[0]))
-
-    count_covered_cells = 0
-    for row in range(len(pBoard)):
-        for col in range(len(pBoard[0])):
-            if pBoard[row][col] == 1:
-                board_to_print[row][col] = mBoard[row][col]
-            else:
-                count_covered_cells += 1
-
-    print("covered cells: ", count_covered_cells)
-    for r in board_to_print:
-        print(r)

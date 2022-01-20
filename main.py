@@ -1,4 +1,5 @@
 from config import *
+from utils import print_elements, print_board_in_format
 from generate_population import *
 from scipy.special import comb
 from localSearchAlgorithm import *
@@ -27,31 +28,49 @@ if __name__ == '__main__':
         # if the best solution was found.
         if len(population) == 1:
             break
-        print("Generation {} ".format(generation))
+        print("\n~~~~~~~~~~~~~~~~~~~~")
+        print("\tGeneration {} ".format(generation))
+        print("~~~~~~~~~~~~~~~~~~~~")
+
+        # print game number and replace steps with board
+        for i in range(len(population)):
+            print("Game number {} to Generation number {}".format(i + 1, generation))
+            print("steps", population[i])  # instead, print the board
+            print_board_view(ms_board, population)  # maybe add pboard???????????????????????????
 
         num_parents = min(num_parents, len(population) // 2)
         best_steps = ga.cal_fitness(population)
 
         parents = ga.generate_parents(ms_board, population, num_parents)
-        print("parents {} ".format(parents))
+
+        # print all parents
+        print_elements("Parents", parents)
+
         parents_size = len(parents)
         offsprings_size = int(comb(parents_size, 2))
         offsprings = ga.crossover(parents, offsprings_size)
-        print("Babies {} ".format(offsprings))
-        ga.mutation(offsprings, len(ms_board), len(ms_board[0]))
-        print("Babies Mutation  {} ".format(offsprings))
 
+        # print all offsprings
+        print_elements("Babies", offsprings)
+
+        ga.mutation(offsprings, len(ms_board), len(ms_board[0]))
+
+        # print all offsprings
+        print_elements("Mutant Babies", offsprings)
 
         # Create new population
         population = parents + offsprings
-        print("New Population {} ".format(population))
-
 
         ga.remove_redundant_clicks(population, all_uncovered_neighbors)
 
-        print('population = {}'.format(population))
+        # print('population = {}'.format(population))
+
+        # print all Population
+        print_elements("Population", population)
+
         print('population shape = {}'.format(shape_of_population(population)))
-        #optimal_ga.extend(shape_of_population(population))
+
+        optimal_ga.extend(shape_of_population(population))
 
         # best_steps=min(min(map(len, population)), best_steps)
 
@@ -60,16 +79,16 @@ if __name__ == '__main__':
         else:
             best_steps = min(map(len, population))
 
-        local_search_population = generate_ls_population(population, ms_board, num_mines)
+        # local_search_population = generate_ls_population(population, ms_board, num_mines)
         # print('local_search_population={}'.format(local_search_population))
         # print('local_search_population shape = {}'.format(shape_of_population(local_search_population)))
-        optimal_ls.extend(shape_of_population((local_search_population)))
+        # optimal_ls.extend(shape_of_population(local_search_population))
 
         # best_steps=min(min(map(len, population)), best_steps)
         global_optimal = min(best_steps, global_optimal)
-        print('{}'.format(population))
+        # print('{}'.format(population))
         print('best result is {}'.format(best_steps))
 
     print('global optimal is {}'.format(global_optimal))
     print('optimal GA = {}'.format(min(optimal_ga)))
-    print('optimal LS = {}'.format(min(optimal_ls)))
+    # print('optimal LS = {}'.format(min(optimal_ls)))
