@@ -27,7 +27,6 @@ def remove_redundant_clicks(solutions, all_uncovered_neighbors):
                         solutions.remove(original_solutions[k][j])
 
 
-
 # Based on the clicks
 # count of clicks smaller, fit more
 # count of clicks larger, fit less
@@ -38,7 +37,7 @@ def cal_fitness(population):
     '''
     min_steps, max_steps = min(map(len, population)), max(map(len, population))
 
-    print('min_steps are {}'.format(min_steps))
+    print('min_steps = {}'.format(min_steps))
     steps_threshold = (min_steps + max_steps) // 2
 
     original_pop = copy.deepcopy(population)
@@ -92,7 +91,6 @@ def generate_parents(ms_board, population, num_parents):
 
 def crossover(parents, offsprings_size):
     """
-
     :param parents: The parents
     :param offsprings_size: How many baby to do.
     :return: All the baby.

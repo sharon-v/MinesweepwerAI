@@ -22,7 +22,6 @@ def open_cell_zero(cell_position_x, cell_position_y, board, number_of_opened_cel
                 temp_board, number_of_opened_cells = open_cell_zero(cell_position_x, cell_position_y + 1,
                                                                     temp_board, number_of_opened_cells)
 
-
         # Down
         if cell_position_x + 1 < len(temp_board):
             if temp_board[cell_position_x + 1][cell_position_y] != -2:  # not opened yet
@@ -40,7 +39,6 @@ def open_cell_zero(cell_position_x, cell_position_y, board, number_of_opened_cel
             temp_board, number_of_opened_cells = open_cell_zero(cell_position_x - 1, cell_position_y - 1,
                                                                 temp_board, number_of_opened_cells)
 
-
         # Up Right
         if (cell_position_y + 1 < len(temp_board[0])) & (cell_position_x - 1 >= 0):
             if temp_board[cell_position_x - 1][cell_position_y + 1] != -2:  # not opened yet
@@ -53,14 +51,13 @@ def open_cell_zero(cell_position_x, cell_position_y, board, number_of_opened_cel
                 temp_board, number_of_opened_cells = open_cell_zero(cell_position_x + 1, cell_position_y - 1,
                                                                     temp_board, number_of_opened_cells)
 
-
         # Down Right
         if (cell_position_y + 1 < len(temp_board[0])) & (cell_position_x + 1 < len(temp_board)):
             if temp_board[cell_position_x + 1][cell_position_y + 1] != -2:  # not opened yet
                 temp_board, number_of_opened_cells = open_cell_zero(cell_position_x + 1, cell_position_y + 1,
-                                                                   temp_board, number_of_opened_cells)
+                                                                    temp_board, number_of_opened_cells)
 
-    #print("board" , temp_board)
+    # print("board" , temp_board)
     return temp_board, number_of_opened_cells
 
 
@@ -137,7 +134,7 @@ def print_current_board_for_view(pBoard, mBoard):
 
 
 #  prints the board for the players view
-def print_board_view(msBoard, moves):   # maybe add pboard???????????????????
+def print_board_view(msBoard, moves):  # maybe add pboard???????????????????
     # create empty board
     board_to_print = []
     unOpenedFeasibleList = generate_unopened_list(msBoard)
@@ -148,7 +145,7 @@ def print_board_view(msBoard, moves):   # maybe add pboard???????????????????
 
     # uncover cells and re-print board
     for m in moves:
-        print( "**************** ", m)
+        print("•••••••• move = ", m)
         x = m[0]
         y = m[1]
 
@@ -180,7 +177,6 @@ def generate_unopened_list(board):
 
 
 def uncover_neighbors_modified(viewBoard, msBoard, unOpenedFeasibleList, x, y):
-
     if viewBoard[x][y] != '*':
         return
 
@@ -201,19 +197,16 @@ def uncover_neighbors_modified(viewBoard, msBoard, unOpenedFeasibleList, x, y):
             if y < len(viewBoard[0]) - 1:
                 uncover_neighbors_modified(viewBoard, msBoard, unOpenedFeasibleList, x, y + 1)
             #####
-            if len(viewBoard) - 1 > x+1 and len(viewBoard[0]) - 1 > y+1:
-                uncover_neighbors_modified(viewBoard, msBoard, unOpenedFeasibleList, x+1, y+1)
-            if x-1 > 0 and len(viewBoard[0]) - 1 > y+1:
-                uncover_neighbors_modified(viewBoard, msBoard, unOpenedFeasibleList, x-1, y+1)
-            if len(viewBoard) - 1 > x+1 and y-1 > 0:
-                uncover_neighbors_modified(viewBoard, msBoard, unOpenedFeasibleList, x+1, y - 1)
-            if x-1 > 0 and y-1 > 0:
-                uncover_neighbors_modified(viewBoard, msBoard, unOpenedFeasibleList, x-1, y-1)
+            if len(viewBoard) - 1 > x + 1 and len(viewBoard[0]) - 1 > y + 1:
+                uncover_neighbors_modified(viewBoard, msBoard, unOpenedFeasibleList, x + 1, y + 1)
+            if x - 1 > 0 and len(viewBoard[0]) - 1 > y + 1:
+                uncover_neighbors_modified(viewBoard, msBoard, unOpenedFeasibleList, x - 1, y + 1)
+            if len(viewBoard) - 1 > x + 1 and y - 1 > 0:
+                uncover_neighbors_modified(viewBoard, msBoard, unOpenedFeasibleList, x + 1, y - 1)
+            if x - 1 > 0 and y - 1 > 0:
+                uncover_neighbors_modified(viewBoard, msBoard, unOpenedFeasibleList, x - 1, y - 1)
 
     elif msBoard[x][y] != 0:
         viewBoard[x][y] = msBoard[x][y]
 
-
     unOpenedFeasibleList.remove([x, y])
-
-

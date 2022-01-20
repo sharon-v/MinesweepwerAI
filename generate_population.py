@@ -22,7 +22,6 @@ res is for accumulating how many cells could be uncovered => fitness
 
 
 def uncover_neighbors(pBoard, mBoard, unOpenedFeasibleList, row, col, uncovered_neighbors):
-
     if pBoard[row][col] == 1:
         return
 
@@ -41,7 +40,6 @@ def uncover_neighbors(pBoard, mBoard, unOpenedFeasibleList, row, col, uncovered_
             uncover_neighbors(pBoard, mBoard, unOpenedFeasibleList, row, col - 1, uncovered_neighbors)
         if col < len(pBoard[0]) - 1:
             uncover_neighbors(pBoard, mBoard, unOpenedFeasibleList, row, col + 1, uncovered_neighbors)
-
 
 
 # FUNCTION generate_population
@@ -71,8 +69,6 @@ def generate_population(mBoard, populationSize, all_uncovered_neighbors):
             rowsCount += 1
         # until here we initialized the pBoard to 0
 
-
-
         uncovered_neighbors = set()
         # chromosome created if no more non-mine cell available to be clicked
         while len(unOpenedFeasibleList) > 0:
@@ -85,8 +81,6 @@ def generate_population(mBoard, populationSize, all_uncovered_neighbors):
                 unOpenedFeasibleList.remove(gen)
             else:
                 uncover_neighbors(pBoard, mBoard, unOpenedFeasibleList, gen[0], gen[1], uncovered_neighbors)
-
-
 
         print()
         if chromosome not in population:
