@@ -6,14 +6,18 @@ import copy
 def find_new_click(board):
     res_i = 0
     res_j = 0
+    print("find new click : ")
+    print_board_in_format(board)
     for i in range(len(board)):
         for j in range(len(board[0])):
             if board[i][j] == 0:
+                print("the clicke in find new", i,j)
                 return i, j
             else:
                 if (board[i][j] != -2) & (board[i][j] != -1):
                     res_i = i
                     res_j = j
+    print("the clicke in find new", i, j)
     return res_i, res_j
 
 
@@ -21,6 +25,8 @@ def local_search(clicks, kept_percent, board, mines_number):
     kept_clicks = int(len(clicks) * kept_percent)
     temp_board = copy.deepcopy(board)
     clicks_return = clicks[:kept_clicks]
+    print("Click ", clicks)
+    print("clicks_return ", clicks_return)
     number_of_opened_cells = len(board) * len(board[0]) - mines_number
     y = 0
     for i in range(kept_clicks):
@@ -35,7 +41,7 @@ def local_search(clicks, kept_percent, board, mines_number):
 
             # print_board_view(temp_board, clicks_return)
         # print("Local Search Game Num ", i)
-        print_board_view(board, clicks_return)
+        #print_board_view(board, clicks_return)
 
     while number_of_opened_cells > 0:
         new_i, new_j = find_new_click(temp_board)
@@ -53,6 +59,7 @@ def local_search(clicks, kept_percent, board, mines_number):
     # print_board_in_format(temp_board)
     # print("blalalal")
     # print_board_view(board, clicks_return)
+    #print_board_view(board, clicks_return)
     return clicks_return, temp_board
 
 
@@ -60,15 +67,24 @@ def generate_ls_population(population, ms_board, num_mines):
     ls_population = []
     print("local search population", population)
     temp_board = []
+    y = 0
     for population_i in population:
         steps = len(population_i)
         best_ls_result = population_i
+        print("population  :", population_i)
         for i in LOCAL_SEARCH_KEPT_PERCENT:
-            ls_result, temp_board = local_search(population_i, i, ms_board, num_mines)
             print("Local Search Game  ", i)
-            print_board_view(ms_board, ls_result)
+            ls_result, temp_board = local_search(population_i, i, ms_board, num_mines)
+            print("ls_result:  ", ls_result)
+
+            #print_board_view(ms_board, ls_result)
             if len(ls_result) < steps:
                 steps = len(ls_result)
                 best_ls_result = ls_result
         ls_population.append(best_ls_result)
+        y += 1
+        print("count of game :", y)
+        y = 0
+
+
     return ls_population
