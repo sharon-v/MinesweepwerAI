@@ -1,3 +1,8 @@
+import generate_board as gb
+
+# to change the board change the definition here
+
+# pre-set boards
 # -1 means 'mine'
 # 8 * 8
 BEGINNER_BOARD = [[0, 1, -1, 1, 0, 0, 0, 0],
@@ -48,6 +53,32 @@ HARD_BOARD = [[0, 0, 0, 0, 0, 1, -1, 1, 1, -1, -1, 3, -1, 1, 0, 1, -1, 1, 0, 0, 
               [0, 0, 2, -1, 2, 1, -1, 1, 0, 1, -1, 1, 1, -1, 1, 0, 0, 0, 1, -1, 2, 1, 0, 0]]
 HARD_MINES_NUMBER = 99
 
+# ~~~~~~~~~~~~~~~~~~~~~~~ DEFINE ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# - CHANGE HOW MUCH OF THE ORIGINAL SOLUTION IS USED -
 LOCAL_SEARCH_KEPT_PERCENT = [0.75, 0.5, 0.25]
 # LOCAL_SEARCH_KEPT_PERCENT = [0.25, 0.12, 0.05]
+
+# - CHANGE POPULATION -
 BEGINNER_POPULATION = 10
+
+"""
+# - CHANGE BOARD -
+# you can give it one of the boards and mines_num above
+# or generate a random one
+"""
+# DEFAULT:
+# 8*8 board, 10 mines, BEGINNER LEVEL -generated
+CURRENT_MINE_NUMBER = BEGINNER_MINES_NUMBER
+CURRENT_BOARD = gb.makeBoard(rows=8, cols=8, num_mines=CURRENT_MINE_NUMBER)
+# CURRENT_BOARD = BEGINNER_BOARD
+
+# # 16*16 board, 40 mines, MEDIUM LEVEL -generated
+# CURRENT_MINE_NUMBER = MEDIUM_MINES_NUMBER
+# CURRENT_BOARD = gb.makeBoard(rows=16, cols=16, num_mines=CURRENT_MINE_NUMBER)
+# # CURRENT_BOARD = MEDIUM_BOARD
+#
+# # 30*16 board, 99 mines, HARD LEVEL -generated
+# CURRENT_MINE_NUMBER = HARD_MINES_NUMBER
+# CURRENT_BOARD = gb.makeBoard(rows=30, cols=16, num_mines=CURRENT_MINE_NUMBER)
+# # CURRENT_BOARD = MEDIUM_BOARD

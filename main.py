@@ -1,19 +1,21 @@
-from config import *
-from utils import print_elements, print_board_in_format
-from generate_population import *
-from scipy.special import comb
-from localSearchAlgorithm import *
-import geneticAlgorithm as ga
+import time
 
-if __name__ == '__main__':
-    ms_board = BEGINNER_BOARD
-    num_mines = BEGINNER_MINES_NUMBER
+from scipy.special import comb
+import geneticAlgorithm as ga
+from generate_population import *
+from localSearchAlgorithm import *
+
+
+def run():
+    # values can be changed in config
+    ms_board = CURRENT_BOARD
+    num_mines = CURRENT_MINE_NUMBER
+
     all_uncovered_neighbors = {}
     initial_population = generate_population(ms_board, BEGINNER_POPULATION, all_uncovered_neighbors)
     population = copy.deepcopy(initial_population)
-    populationls = copy.deepcopy(initial_population)
-    print('generated population = {}'.format(min(shape_of_population(population))))
 
+    print('generated population = {}'.format(min(shape_of_population(population))))
 
     global_optimal = len(ms_board) * len(ms_board[0])
     optimal_ga = []
@@ -22,8 +24,15 @@ if __name__ == '__main__':
     ###################
     # Genetic Algorithm
     ###################
+
+    # calc runtime of genetic
+    start = time.time()
+    for i in range(10000):
+        True
+
     num_generations = 5
     num_parents = 4
+
     for generation in range(num_generations):
         # if the best solution was found.
         if len(population) == 1:
@@ -71,18 +80,36 @@ if __name__ == '__main__':
         # print('{}'.format(population))
         print('best result is {}'.format(best_steps))
 
-
-
-
+    # end runtime calc
+    end = time.time()
 
     ###################
     # Local Search
     ###################
-    local_search_population = generate_ls_population(populationls, ms_board, num_mines)
+
+    # calc runtime of LS
+    start1 = time.time()
+    for i in range(10000):
+        True
+
+    population_ls = copy.deepcopy(initial_population)
+    local_search_population = generate_ls_population(population_ls, ms_board, num_mines)
     print('local_search_population={}'.format(local_search_population))
     print('local_search_population shape = {}'.format(shape_of_population(local_search_population)))
     optimal_ls.extend(shape_of_population(local_search_population))
 
+    # end runtime calc
+    end1 = time.time()
+
     print('global optimal is {}'.format(global_optimal))
     print('optimal GA = {}'.format(min(optimal_ga)))
     print('optimal LS = {}'.format(min(optimal_ls)))
+
+    print("Genetic RunTime: ", end - start)
+    print("LocalSearch RunTime: ", end1 - start1)
+
+
+if __name__ == '__main__':
+    num_of_runs = 1
+    for i in range(num_of_runs):
+        run()

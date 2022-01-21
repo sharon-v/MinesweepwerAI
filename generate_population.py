@@ -44,7 +44,7 @@ def uncover_neighbors(pBoard, mBoard, unOpenedFeasibleList, row, col, uncovered_
 
 # FUNCTION generate_population
 # ARGUMENTS: mBoard, populationSize
-# pop_fitness: (a, b) a is the fitness, b is one solution
+# fitness is calculated as least moves in the solutions
 def generate_population(mBoard, populationSize, all_uncovered_neighbors):
     # Generate unOpenedFeasibleList
     unOpenedFeasibleList = utils.generate_unopened_list(mBoard)
@@ -92,12 +92,12 @@ def generate_population(mBoard, populationSize, all_uncovered_neighbors):
             click_key = str(first_click[0]) + '+' + str(first_click[1])
 
             all_uncovered_neighbors[click_key] = uncovered_neighbors
+            #
             # chromosome_fitness = copy.deepcopy(chromosome)
-
             # chromosome_fitness.insert(0, cells_opened)
             # pop_fitness.append((cells_opened, chromosome))
-
             # pop_fitness.append((len(chromosome), chromosome))
+            #
             count = count + 1
 
     return population

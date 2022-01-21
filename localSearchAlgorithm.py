@@ -11,13 +11,13 @@ def find_new_click(board):
     for i in range(len(board)):
         for j in range(len(board[0])):
             if board[i][j] == 0:
-                print("the clicke in find new", i,j)
+                print("the click in 'find new' func: ", [i, j])
                 return i, j
             else:
                 if (board[i][j] != -2) & (board[i][j] != -1):
                     res_i = i
                     res_j = j
-    print("the clicke in find new", i, j)
+    print("the click in 'find new' func: ", [i, j])
     return res_i, res_j
 
 

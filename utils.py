@@ -134,7 +134,7 @@ def print_current_board_for_view(pBoard, mBoard):
 
 
 #  prints the board for the players view
-def print_board_view(msBoard, moves):  # maybe add pboard???????????????????
+def print_board_view(msBoard, moves):
     # create empty board
     board_to_print = []
     unOpenedFeasibleList = generate_unopened_list(msBoard)
@@ -145,18 +145,10 @@ def print_board_view(msBoard, moves):  # maybe add pboard???????????????????
 
     # uncover cells and re-print board
     for m in moves:
-        print("•••••••• move = ", m)
+        print("•••••••• move = {}\n".format(m))
         x = m[0]
         y = m[1]
 
-        # cur_move = msBoard[x][y]
-
-        # if cur_move == -1:
-        #     board_to_print[x][y] = '!'
-        # elif cur_move == 0:
-        #     pass  # need to open all cells until the border is not 0's
-        # elif cur_move != 0:
-        #     board_to_print[x][y] = msBoard[x][y]
         uncover_neighbors_modified(board_to_print, msBoard, unOpenedFeasibleList, x, y)
         # print the board
         print_board_in_format(board_to_print)
@@ -196,7 +188,7 @@ def uncover_neighbors_modified(viewBoard, msBoard, unOpenedFeasibleList, x, y):
                 uncover_neighbors_modified(viewBoard, msBoard, unOpenedFeasibleList, x, y - 1)
             if y < len(viewBoard[0]) - 1:
                 uncover_neighbors_modified(viewBoard, msBoard, unOpenedFeasibleList, x, y + 1)
-            #####
+            # diagonals
             if len(viewBoard) - 1 > x + 1 and len(viewBoard[0]) - 1 > y + 1:
                 uncover_neighbors_modified(viewBoard, msBoard, unOpenedFeasibleList, x + 1, y + 1)
             if x - 1 > 0 and len(viewBoard[0]) - 1 > y + 1:

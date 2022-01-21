@@ -1,7 +1,5 @@
-import random
-import time
 import copy
-
+import random
 from config import *
 
 
@@ -48,19 +46,19 @@ def cal_fitness(population):
     return min_steps
 
 
-# Based on the cells opened
-# more cells opened, fit more
-# fewer cells opened, fit less
-
-def fitness_func(ms_board, solutions, pop_fitness):
-    original_pop_fitness = copy.deepcopy(pop_fitness)
-
-    fitness_threshold = (len(ms_board) * len(ms_board[0]) - BEGINNER_MINES_NUMBER) * 0.75
-    for solution in original_pop_fitness:
-        score = solution[0]
-        if score < fitness_threshold:
-            pop_fitness.remove(solution)
-            solutions.remove(solution[1])
+# # Based on the cells opened
+# # more cells opened, fit more
+# # fewer cells opened, fit less
+#
+# def fitness_func(ms_board, solutions, pop_fitness):
+#     original_pop_fitness = copy.deepcopy(pop_fitness)
+#
+#     fitness_threshold = (len(ms_board) * len(ms_board[0]) - BEGINNER_MINES_NUMBER) * 0.75
+#     for solution in original_pop_fitness:
+#         score = solution[0]
+#         if score < fitness_threshold:
+#             pop_fitness.remove(solution)
+#             solutions.remove(solution[1])
 
 
 def generate_parents(ms_board, population, num_parents):
