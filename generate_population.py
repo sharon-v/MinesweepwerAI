@@ -1,7 +1,7 @@
 import random
-import utils
 
-# Author: Barry, modified by happygirlzt
+import extract_data
+import utils
 
 """
 FUNCTION uncover_neighbors
@@ -57,6 +57,9 @@ def generate_population(mBoard, populationSize, all_uncovered_neighbors):
     boardRows = len(mBoard)
     boardCols = len(mBoard[0])
 
+    # collect data for csv
+    chromlenforCSV = []
+
     while count <= populationSize:
         # initialize chromosome, unOpenedFeasibleList, and pBoard
         chromosome = []
@@ -88,6 +91,9 @@ def generate_population(mBoard, populationSize, all_uncovered_neighbors):
             print("amount of chromosomes: ", len(chromosome))
             population.append(chromosome)
 
+            # collect chromosome lengths to list and print to csv
+            chromlenforCSV.append(len(chromosome))
+
             first_click = chromosome[0]
             click_key = str(first_click[0]) + '+' + str(first_click[1])
 
@@ -99,5 +105,6 @@ def generate_population(mBoard, populationSize, all_uncovered_neighbors):
             # pop_fitness.append((len(chromosome), chromosome))
             #
             count = count + 1
-
+    # collect for csv
+    extract_data.GA_CHROM.append(chromlenforCSV)
     return population

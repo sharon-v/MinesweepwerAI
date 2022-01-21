@@ -41,7 +41,7 @@ def local_search(clicks, kept_percent, board, mines_number):
 
             # print_board_view(temp_board, clicks_return)
         # print("Local Search Game Num ", i)
-        #print_board_view(board, clicks_return)
+        # print_board_view(board, clicks_return)
 
     while number_of_opened_cells > 0:
         new_i, new_j = find_new_click(temp_board)
@@ -59,32 +59,37 @@ def local_search(clicks, kept_percent, board, mines_number):
     # print_board_in_format(temp_board)
     # print("blalalal")
     # print_board_view(board, clicks_return)
-    #print_board_view(board, clicks_return)
+    # print_board_view(board, clicks_return)
     return clicks_return, temp_board
 
 
 def generate_ls_population(population, ms_board, num_mines):
     ls_population = []
     print("local search population", population)
+    popforcsv = []
     temp_board = []
     y = 0
     for population_i in population:
         steps = len(population_i)
         best_ls_result = population_i
         print("population  :", population_i)
+        keptforcsv = []
         for i in LOCAL_SEARCH_KEPT_PERCENT:
             print("Local Search Game  ", i)
             ls_result, temp_board = local_search(population_i, i, ms_board, num_mines)
+            # collect for csv
+            keptforcsv.append(len(ls_result))
             print("ls_result:  ", ls_result)
 
-            #print_board_view(ms_board, ls_result)
+            # print_board_view(ms_board, ls_result)
             if len(ls_result) < steps:
                 steps = len(ls_result)
                 best_ls_result = ls_result
         ls_population.append(best_ls_result)
         y += 1
-        print("count of game :", y)
+        print("Current kept percent: ", y)
         y = 0
-
+        # collect for csv
+        popforcsv.append(keptforcsv)
 
     return ls_population
