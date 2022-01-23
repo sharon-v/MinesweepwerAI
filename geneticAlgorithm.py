@@ -1,6 +1,5 @@
 import copy
 import random
-from config import *
 
 
 def remove_redundant_clicks(solutions, all_uncovered_neighbors):

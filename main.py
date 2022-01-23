@@ -18,7 +18,6 @@ def run():
     population = copy.deepcopy(initial_population)
     population_ls = copy.deepcopy(initial_population)
 
-
     print('generated population = {}'.format(min(shape_of_population(population))))
 
     global_optimal = len(ms_board) * len(ms_board[0])
@@ -136,5 +135,3 @@ if __name__ == '__main__':
     num_of_runs = 1
     for n in range(num_of_runs):
         run()
-        extract_data.func()
-        # print(extract_data.time_opt)

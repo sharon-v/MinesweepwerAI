@@ -7,7 +7,7 @@ import copy
 def find_new_click(board):
     res_i = 0
     res_j = 0
-    print("find new click : ")
+    # print("find new click : ")
     # print_board_in_format(board)
     for i in range(len(board)):
         for j in range(len(board[0])):

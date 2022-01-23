@@ -1,5 +1,4 @@
 import random
-
 import extract_data
 import utils
 
