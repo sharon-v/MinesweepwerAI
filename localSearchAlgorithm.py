@@ -1,3 +1,4 @@
+import extract_data
 from config import *
 from utils import *
 import copy
@@ -7,17 +8,17 @@ def find_new_click(board):
     res_i = 0
     res_j = 0
     print("find new click : ")
-    print_board_in_format(board)
+    # print_board_in_format(board)
     for i in range(len(board)):
         for j in range(len(board[0])):
             if board[i][j] == 0:
-                print("the click in 'find new' func: ", [i, j])
+                # print("the click in 'find new' func: ", [i, j])
                 return i, j
             else:
                 if (board[i][j] != -2) & (board[i][j] != -1):
                     res_i = i
                     res_j = j
-    print("the click in 'find new' func: ", [i, j])
+    # print("the click in 'find new' func: ", [i, j])
     return res_i, res_j
 
 
@@ -79,6 +80,7 @@ def generate_ls_population(population, ms_board, num_mines):
             ls_result, temp_board = local_search(population_i, i, ms_board, num_mines)
             # collect for csv
             keptforcsv.append(len(ls_result))
+            print("keptfocsv:", keptforcsv)
             print("ls_result:  ", ls_result)
 
             # print_board_view(ms_board, ls_result)
@@ -91,5 +93,5 @@ def generate_ls_population(population, ms_board, num_mines):
         y = 0
         # collect for csv
         popforcsv.append(keptforcsv)
-
+    extract_data.LS_POP.append(popforcsv)
     return ls_population

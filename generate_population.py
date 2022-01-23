@@ -88,7 +88,7 @@ def generate_population(mBoard, populationSize, all_uncovered_neighbors):
         print()
         if chromosome not in population:
             print("chromosome-", count, " = ", chromosome)
-            print("amount of chromosomes: ", len(chromosome))
+            print("num of genes in chromosome: ", len(chromosome))
             population.append(chromosome)
 
             # collect chromosome lengths to list and print to csv

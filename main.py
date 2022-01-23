@@ -14,7 +14,10 @@ def run():
 
     all_uncovered_neighbors = {}
     initial_population = generate_population(ms_board, BEGINNER_POPULATION, all_uncovered_neighbors)
+    # utils.print_elements("init-pop", initial_population)
     population = copy.deepcopy(initial_population)
+    population_ls = copy.deepcopy(initial_population)
+
 
     print('generated population = {}'.format(min(shape_of_population(population))))
 
@@ -49,7 +52,8 @@ def run():
         for i in range(len(population)):
             print("Game {} - Generation {}".format(i + 1, generation))
             # print("steps", population[i])  # instead, print the board
-            print_board_view(ms_board, population[0])
+
+            # print_board_view(ms_board, population[0])
 
         num_parents = min(num_parents, len(population) // 2)
         best_steps = ga.cal_fitness(population)
@@ -105,8 +109,7 @@ def run():
     for t in range(10000):
         True
 
-    population_ls = copy.deepcopy(initial_population)
-    extract_data.LS_POP.append(population_ls)
+    extract_data.LS_POP.append(len(population_ls))
     local_search_population = generate_ls_population(population_ls, ms_board, num_mines)
     print('local_search_population={}'.format(local_search_population))
     print('local_search_population shape = {}'.format(shape_of_population(local_search_population)))
@@ -123,14 +126,15 @@ def run():
     print("LocalSearch RunTime: ", end1 - start1)
 
     # collect runtime and opt for csv
-    extract_data.GA_OPT.append([min(optimal_ga)])
-    extract_data.LS_OPT.append([min(optimal_ls)])
-    extract_data.GA_RTIME.append([end - start])
-    extract_data.LS_RTIME.append([end1 - start1])
+    extract_data.GA_OPT.append(min(optimal_ga))
+    extract_data.LS_OPT.append(min(optimal_ls))
+    extract_data.GA_RTIME.append(end - start)
+    extract_data.LS_RTIME.append(end1 - start1)
 
 
 if __name__ == '__main__':
     num_of_runs = 1
     for n in range(num_of_runs):
         run()
-        extract_data.f()
+        extract_data.func()
+        # print(extract_data.time_opt)

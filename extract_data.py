@@ -26,6 +26,8 @@ def func():
     print("GA_RTIME ", GA_RTIME)
     print("GA_GEN ", GA_GEN)
     print("GA_CHROM ", GA_CHROM)
+
+
 """
 not finished!!!!
 """
@@ -35,9 +37,20 @@ not finished!!!!
 # cities = pd.DataFrame([['Sacramento', 'California'], ['Miami', 'Florida']], columns=['City', 'State'])
 # new_column_names = ['City_Name', 'State_Name']
 # cities.to_csv('cities.csv', index=False, header=new_column_names)
-data = [GA_OPT[0], GA_RTIME[0], LS_OPT[0], LS_RTIME[0]]
-time_opt = pd.DataFrame(data, columns=['optimal GA', 'runtime GA', 'optimal LS', 'runtime LS'])
-time_opt.to_csv('time-opt-data.csv', index=False)
+
+# data = [GA_OPT, GA_RTIME, LS_OPT, LS_RTIME]
+# time_opt = pd.DataFrame([GA_OPT + GA_RTIME, LS_OPT + LS_RTIME], index=['GA', 'LS'], columns=['optimal result', 'runtime'])
+# data2 = [LS_POP_NUM[0], LS_POP[0]]
+# ls = pd.DataFrame(data2, columns=["ls pop num", "ls pop 3 games"])
+# data3 = [GA_GEN[0], GA_CHROM[0]]
+# ga = pd.DataFrame(data3, columns=["generation", "ga pop len"])
+# with pd.ExcelWriter('data.xlsx') as writer:
+#     time_opt.to_excel(writer, sheet_name='sheet1')
+#     ls.to_excel(writer, sheet_name='sheet2')
+#     ga.to_excel(writer, sheet_name='sheet3')
+
+
+# time_opt.to_csv('time-opt-data.csv', index=False)
 
 # print runtime and optimal num of steps
 
